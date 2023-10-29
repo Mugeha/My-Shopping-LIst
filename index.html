@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Name">
+  <meta name="description" content="My shopping List">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Shopping List</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="C:\Users\25475\OneDrive\shoppingList\apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="C:\Users\25475\OneDrive\shoppingList\favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="C:\Users\25475\OneDrive\shoppingList\favicon-16x16.png">
+<link rel="manifest" href="C:/Users/25475/OneDrive/shoppingList/site.webmanifest">
+	<link rel="stylesheet" href="C:\Users\25475\OneDrive\shoppingList\index.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<h1>My Shopping List 📝</h1>
+	<div class="container">
+		<ul id="list"></ul>
+		<label for="item-input" >Item</label>
+		<input type="text" id="item-input" placeholder="e.g. rice">
+		<button id="add-item-btn">Add</button>
+    <p id="message" style="color:red;display:none;">Item already exists!!</p>
+	</div>
+	<script>
+    // const emojis = ['🐥','🐯','🐼']
+// console.log(emojis.includes('🐴'))
+
+const addItemBtn = document.getElementById('add-item-btn')
+const itemInput = document.getElementById('item-input')
+const listEl = document.getElementById('list')
+const message = document.getElementById('message')
+
+const shoppingList = []
+
+addItemBtn.addEventListener('click', function(){
+// console.log(itemInput.value)
+const newItem = itemInput.value.trim(); // Removes trailing spaces
+if (newItem !== '' && !shoppingList.includes(newItem)){
+  shoppingList.push(newItem)
+  render()
+    itemInput.value = '';
+  message.style.display = 'none';
+} else if (shoppingList.includes(newItem)){
+    message.style.display = 'block';
+  // alert('Item already exists!')
+}
+  // shoppingList.push(itemInput.value)
+  // render()
+
+})
+
+function render(){
+    let html = ''
+    for (let item of shoppingList){
+        html += `<li class="list-item">${item}</li>`
+    }
+    listEl.innerHTML = html
+}
+
+render()
+
+
+  </script>
+</body>
+</html>
